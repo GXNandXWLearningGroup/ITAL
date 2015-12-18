@@ -1,0 +1,35 @@
+.LOG
+hello git .
+
+
+22:30 2015/12/18
+//*********************  git配置***********************************
+$ git config --global user.name "Your Name"
+$ git config --global user.email "email@example.com"
+
+ssh 配置
+https://help.github.com/articles/generating-ssh-keys/
+ 
+//*********************  git local*********************************
+git init
+git add <file>
+git commit -m "注释内容"
+
+git diff
+
+git log --pretty=oneline 一行展示修改历史记录。
+
+git reset --hard HEAD^  。回退一个版本
+git reflog 。查看历史版本号
+git reset --hard 【版本号码】。
+
+使用时：首先 git log 查看历史；然后git relog查看历史版本号。
+
+//*********************  git remote*********************************
+
+要关联一个远程库，使用命令git remote add origin git@server-name:path/repo-name.git；
+
+关联后，使用命令git push -u origin master第一次推送master分支的所有内容；
+
+此后，每次本地提交后，只要有必要，就可以使用命令git push origin master推送最新修改；
+
