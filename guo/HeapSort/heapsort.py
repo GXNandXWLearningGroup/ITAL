@@ -17,14 +17,13 @@ def MAX_HEAPIFY(lists,index):
 	l=LEFT(index)
 	r=RIGHT(index)
 	largest=index
-	# print "letf child:"+str(l)+" right child"+str(r)
+
 	if l<length and lists[l]>lists[index] :
 		largest=l
 
 	if r<length and lists[r]>lists[largest]:
 		largest=r
 	if largest!=index:
-		# print largest
 		temp=lists[index]
 		lists[index]=lists[largest]
 		lists[largest]=temp
@@ -35,12 +34,6 @@ def BUILD_MAX_HEAP(lists):
 	length=len(lists)
 	for i in range(0,length/2):
 		lists=MAX_HEAPIFY(lists,length/2-i)
-		# print length/2-i
-	# return lists
-
-
-
-	# return lists
 
 def HEAP_SORT(lists):
 	length=len(lists)
@@ -65,4 +58,3 @@ if __name__ == '__main__':
 		if i<x:
 			print False
 		x=i
-	# print list_origin
