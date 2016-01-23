@@ -9,7 +9,8 @@
 |      2      |  2015-12-31  |      快速排序          | Failed（未检查） |
 |      3      |  2016-01-07  |          -             | Failed (Pause for Exam) |
 |      4      |  2016-01-14  |          -             | Failed (Pause for Exam) |
-
+|      5      |  2016-01-21  |          -             | delay to 2016/01/23 |
+ 
 
 ##同步流程
 
