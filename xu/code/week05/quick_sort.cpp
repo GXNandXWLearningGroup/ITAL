@@ -1,6 +1,6 @@
 #include <iostream>
 #include <ctime>
-
+#include <cstring> // for memset
 using namespace std ;
 
 /**************
@@ -67,22 +67,6 @@ int partition(int *arr , int h , int r)
     return split_idx + 1  ;
 }
 
-int partition_hoare(int *arr , int h , int r)
-{
-    // generate a random pivot index
-    int range = r - h + 1 ;
-    int pivot_idx = rand() % range + h ;
-    swap(arr[pivot_idx] , arr[r]) ;
-    int split_idx = h - 1 ;
-    int pivot_val = arr[r] ; 
-    --r ;
-    while( h < r )
-    {
-        
-
-    }
-}
-
 void _quick_sort(int *arr , int h , int r)
 {
     if(h < r)
@@ -98,22 +82,62 @@ void quick_sort(int *arr , int arr_sz )
     if(arr_sz < 1 ) return ;
     _quick_sort(arr , 0 , arr_sz - 1) ;
 }
+int partition_hoare(int *arr , int h , int r)
+{
+    // generate a random pivot index
+    int range = r - h + 1 ;
+    int pivot_idx = rand() % range + h ;
+    swap(arr[pivot_idx] , arr[r]) ;
+    int pivot_val = arr[r] ; 
+    int left_ptr = h ;
+    int right_ptr = r - 1 ;
+    while( left_ptr < right_ptr )
+    {
+        while(left_ptr < right_ptr && arr[left_ptr] < pivot_val) ++left_ptr ;
+        while(left_ptr < right_ptr && arr[right_ptr] >= pivot_val) --right_ptr ;
+        swap(arr[left_ptr] , arr[right_ptr]) ;
+    }
+    if(arr[left_ptr] >= pivot_val) swap(arr[left_ptr] , arr[r]) ;
+    else{ 
+        //++left_ptr ;
+        left_ptr = r ; 
+        cerr << "special case " << endl ;
+    }
+    return left_ptr ;
+}
 
 
+void _quick_sort_hoare(int *arr , int h , int r)
+{
+    if(h < r)
+    {
+        int pivot_idx = partition_hoare(arr , h , r) ;
+        _quick_sort_hoare(arr , h , pivot_idx - 1) ;
+        _quick_sort_hoare(arr , pivot_idx + 1 , r ) ;
+    }
+}
+
+void quick_sort_hoare(int *arr , int arr_sz )
+{
+    if(arr_sz < 1 ) return ;
+    _quick_sort_hoare(arr , 0 , arr_sz - 1) ;
+}
 
 int main(int argc , char *argv[])
 {
     const int ARRAY_SIZE = 0xFFFF ;
-    const size_t MAX_NUM = 0xFFFFFF ;
-    int arr[ARRAY_SIZE] = { 0 } ;
+    const size_t MAX_NUM = 0xFFFFFFF ;
+    int *arr = new int[ARRAY_SIZE] ;
+    memset(arr , 0 , sizeof(int)*ARRAY_SIZE) ;
     fill_array_with_random_value(arr , ARRAY_SIZE , MAX_NUM , false) ;
     //print_array(arr , ARRAY_SIZE) ;
-    quick_sort(arr , ARRAY_SIZE) ;
+    quick_sort_hoare(arr , ARRAY_SIZE) ;
     //print_array(arr , ARRAY_SIZE) ;
     if(is_array_increasing(arr , ARRAY_SIZE))
-        cout << "heap sort implementation is right" << endl ;
+        cout << "quick sort implementation is right" << endl ;
     else 
-        cout << "heap sort implementation is wrong" << endl ;
+        cout << "quick sort implementation is wrong" << endl ;
+    delete [] arr ;
     return 0 ;
 }
 
