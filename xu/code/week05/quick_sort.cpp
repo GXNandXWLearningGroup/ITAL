@@ -56,7 +56,7 @@ int partition(int *arr , int h , int r)
     int pivot_val = arr[r] ;
     for(int pos = h ; pos <= r - 1 ; ++pos)
     {
-        if(arr[pos] <= pivot_val)
+        if(arr[pos] < pivot_val)
         {
             ++split_idx ;
             swap(arr[split_idx] , arr[pos]) ;
@@ -100,8 +100,7 @@ int partition_hoare(int *arr , int h , int r)
     if(arr[left_ptr] >= pivot_val) swap(arr[left_ptr] , arr[r]) ;
     else{ 
         //++left_ptr ;
-        left_ptr = r ; 
-        cerr << "special case " << endl ;
+        left_ptr = r ; // it is equalvalent to `++left_ptr`
     }
     return left_ptr ;
 }
